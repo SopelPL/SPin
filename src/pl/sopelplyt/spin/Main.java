@@ -1,5 +1,8 @@
 package pl.sopelplyt.spin;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -48,6 +51,19 @@ public class Main extends JavaPlugin{
 		this.getConfig().set(path, text);
 		this.saveConfig();
 		return;
+	}
+	
+	public String getHashedString(String string){
+		MessageDigest m;
+		try {
+			m = MessageDigest.getInstance("MD5");
+			m.update(string.getBytes(),0,string.length());
+			return new BigInteger(1,m.digest()).toString(16);
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public static Main getInstance(){ return instance; }
