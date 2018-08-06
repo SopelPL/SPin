@@ -35,11 +35,12 @@ public class InventoryClick implements Listener{
 							if(event.getInventory().getName().equals("§cRejestracja")){
 								if(Main.getInstance().pins.containsKey(event.getWhoClicked().getUniqueId())){
 									String pin = Main.getInstance().getHashedString(Main.getInstance().pins.get(event.getWhoClicked().getUniqueId()));
+									String unhashPin = Main.getInstance().pins.get(event.getWhoClicked().getUniqueId());
 									Main.getInstance().addToConfig("users." + event.getWhoClicked().getUniqueId().toString(), pin);
 									Main.getInstance().auth.add(event.getWhoClicked().getUniqueId());
 									Main.getInstance().pins.remove(event.getWhoClicked().getUniqueId());
 									event.getWhoClicked().closeInventory();
-									event.getWhoClicked().sendMessage(ChatColor.translateAlternateColorCodes('&', Main.getInstance().prefix + " &aZarejestrowano! &2Twoj pin to &6" + pin));
+									event.getWhoClicked().sendMessage(ChatColor.translateAlternateColorCodes('&', Main.getInstance().prefix + " &aZarejestrowano! &2Twoj pin to &6" + unhashPin));
 								}
 							}else if(event.getInventory().getName().equals("§cLogowanie")){
 								if(Main.getInstance().pins.containsKey(event.getWhoClicked().getUniqueId())){
